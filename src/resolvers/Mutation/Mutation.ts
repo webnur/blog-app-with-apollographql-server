@@ -46,7 +46,7 @@ export const Mutation = {
     //   expiresIn: "1d",
     // });
 
-    const token = await jwtHealper({ userId: newUser.id });
+    const token = await jwtHealper.generateToken({ userId: newUser.id });
 
     return {
       userError: null,
@@ -79,11 +79,40 @@ export const Mutation = {
     // const token = jwt.sign({ userId: user.id }, "signature", {
     //   expiresIn: "1d",
     // });
-    const token = await jwtHealper({ userId: user.id });
+    const token = await jwtHealper.generateToken({ userId: user.id });
 
     return {
       userError: null,
       token,
+    };
+  },
+
+  addPost: async (parent: any, args: any, { prisma, userInfo }: any) => {
+    if (!userInfo) {
+      return {
+        userError: "Unauthorized",
+        post: null,
+      };
+    }
+
+    if (!args.title || !args.content) {
+      return {
+        userError: "Title and content are required",
+        post: null,
+      };
+    }
+
+    const post = await prisma.post.create({
+      data: {
+        title: args.title,
+        content: args.content,
+        authorId: userInfo.userId,
+      },
+    });
+
+    return {
+      userError: null,
+      post,
     };
   },
 };
