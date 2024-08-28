@@ -23,6 +23,16 @@ export const typeDefs = `#graphql
       title: String,
       content: String
     ): postPayload
+
+    updatePost(
+      postId: ID!,
+      title: String,
+      content: String
+    ): postPayload
+
+    deletePost(
+      id: ID!
+    ): postPayload
      
      
   }
@@ -62,7 +72,10 @@ export const typeDefs = `#graphql
    userError: String
    }
     
-
+  input postInput {
+    title: String
+    content: String
+  }
 
 
 `;

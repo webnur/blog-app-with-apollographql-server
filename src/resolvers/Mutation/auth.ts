@@ -1,5 +1,5 @@
-import { jwtHealper } from "../../utils/jwtHelper";
 import bcrypt from "bcrypt";
+import { jwtHealper } from "../../utils/jwtHelper";
 interface UserInfo {
   name: string;
   email: string;
