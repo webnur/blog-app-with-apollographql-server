@@ -2,11 +2,13 @@ import { Query } from "./Query";
 import { Mutation } from "./Mutation/Mutation";
 import { Post } from "./post";
 import { User } from "./user";
+import { Profile } from "./prifile";
 
 export const resolvers = {
   Query,
   Post,
   User,
+  Profile,
   Mutation,
 };
 
